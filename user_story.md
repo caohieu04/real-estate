@@ -66,7 +66,7 @@ As a User, I can search "Decoration" based on:
   "style"
   "price"
   "dimensions"
-  "ship"
+  "shiping_fee_per_km"
   Afer-search, I can view found "Decoration":
     'like'
     'add to cart'
