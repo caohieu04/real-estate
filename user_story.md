@@ -53,6 +53,7 @@ As a User, I can search for "Property" based on:
 
 As a Buyer, I can add new "Property":
   "property type"
+  "live_option"
   "price"
   "built-up-area"
   "location"
@@ -66,7 +67,6 @@ As a User, I can search "Decoration" based on:
   "style"
   "price"
   "dimensions"
-  "shiping_fee_per_km"
   Afer-search, I can view found "Decoration":
     'like'
     'add to cart'
