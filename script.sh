@@ -6,3 +6,5 @@ docker run -d --name mysql --privileged=true -e MYSQL_ROOT_PASSWORD="root123$%^"
 #Go install 
 go get -u github.com/gin-gonic/gin
 go get -u gorm.io/gorm
+go get -u gorm.io/driver/mysql
+go get -u github.com/aws/aws-sdk-go/
