@@ -2,10 +2,14 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"os"
 
+	"github.com/caohieu04/real-estate/component"
 	"github.com/caohieu04/real-estate/component/setenv"
 	"github.com/caohieu04/real-estate/component/upcloud"
+	"github.com/caohieu04/real-estate/middleware"
+	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -34,5 +38,17 @@ func main() {
 }
 
 func runService(db *gorm.DB, uploadProvider upcloud.UploadProvider) error {
-	appCtx := component
+	appCtx := component.NewAppContext(db, uploadProvider)
+
+	server := gin.Default()
+
+	server.Use(middleware.Recover(appCtx))
+
+	server.GET("/ping", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "Ping success!",
+		})
+	})
+
+	// server.POST("/upload)
 }
