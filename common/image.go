@@ -23,12 +23,12 @@ func (img *Image) Scan(value interface{}) error {
 	if !ok {
 		return errors.New(fmt.Sprint("Failed to unmarsal JSONB value:", value))
 	}
-	var imgTemp Image
-	if err := json.Unmarshal(bytes, &imgTemp); err != nil {
+	var temp Image
+	if err := json.Unmarshal(bytes, &temp); err != nil {
 		return err
 	}
 
-	*img = imgTemp
+	*img = temp
 	return nil
 }
 
@@ -47,18 +47,42 @@ func (imgs *Images) Scan(value interface{}) error {
 		return errors.New(fmt.Sprint("Failed to unmarshal JSONB value:", value))
 	}
 
-	var imgsTemp []Image
-	if err := json.Unmarshal(bytes, &imgs); err != nil {
+	var temp []Image
+	if err := json.Unmarshal(bytes, &temp); err != nil {
 		return err
 	}
 
-	*imgs = imgsTemp
+	*imgs = temp
 	return nil
 }
 
 func (imgs *Images) Value() (driver.Value, error) {
-	if imgs != nil {
+	if imgs == nil {
 		return nil, nil
 	}
 	return json.Marshal(imgs)
 }
+
+// type Images []Image
+
+// func (imgs *Images) Scan(value interface{}) error {
+// 	bytes, ok := value.([]byte)
+// 	if !ok {
+// 		return errors.New(fmt.Sprint("Failed to unmarshal JSONB value:", value))
+// 	}
+
+// 	var imgsTemp []Image
+// 	if err := json.Unmarshal(bytes, &imgs); err != nil {
+// 		return err
+// 	}
+
+// 	*imgs = imgsTemp
+// 	return nil
+// }
+
+// func (imgs *Images) Value() (driver.Value, error) {
+// 	if imgs != nil {
+// 		return nil, nil
+// 	}
+// 	return json.Marshal(imgs)
+// }
