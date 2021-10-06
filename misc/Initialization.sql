@@ -60,7 +60,6 @@ CREATE TABLE `seller_ratings` (
 DROP TABLE IF EXISTS `sellers`;
 CREATE TABLE `sellers` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `owner_id` int NOT NULL,
   `name` varchar(50) NOT NULL,
   `addr` varchar(255) NOT NULL,
   `city_id` int DEFAULT NULL,

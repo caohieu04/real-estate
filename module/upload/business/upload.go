@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"image"
+	"image/jpeg"
 	"io"
 	"log"
 	"path/filepath"
@@ -57,12 +57,20 @@ func (biz *uploadBusiness) Upload(ctx context.Context, data []byte, folder, file
 
 	return img, nil
 }
+
+// func convertToPNG(w io.Writer, r io.Reader) error {
+// 	img, _, err := image.Decode(r)
+// 	if err != nil {
+// 		return err
+// 	}
+// 	return png.Encode(w, img.)
+// }
+
 func getImageDimension(reader io.Reader) (int, int, error) {
-	img, _, err := image.DecodeConfig(reader)
+	img, err := jpeg.DecodeConfig(reader)
 	if err != nil {
-		log.Print("err: ", err)
+		log.Println(err)
 		return 0, 0, err
 	}
-
 	return img.Width, img.Height, nil
 }
