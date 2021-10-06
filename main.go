@@ -9,6 +9,8 @@ import (
 	"github.com/caohieu04/real-estate/component/setenv"
 	"github.com/caohieu04/real-estate/component/upcloud"
 	"github.com/caohieu04/real-estate/middleware"
+	sellergin "github.com/caohieu04/real-estate/module/seller/transport/gin"
+	uploadgin "github.com/caohieu04/real-estate/module/upload/transport/gin"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -50,5 +52,16 @@ func runService(db *gorm.DB, uploadProvider upcloud.UploadProvider) error {
 		})
 	})
 
+	server.POST("/upload", uploadgin.Upload(appCtx))
+
+	sellers := server.Group("/sellers")
+	{
+		sellers.POST("", sellergin.CreateSeller(appCtx))
+		sellers.GET("/:id", sellergin.GetSeller(appCtx))
+		sellers.GET("", sellergin.ListSeller(appCtx))
+		sellers.PATCH("/:id", sellergin.UpdateSeller(appCtx))
+		sellers.DELETE("/:id", sellergin.DeleteSeller(appCtx))
+	}
+	return server.Run("103.154.100.225:8080")
 	// server.POST("/upload)
 }
