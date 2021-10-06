@@ -72,7 +72,6 @@ CREATE TABLE `sellers` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `owner_id` (`owner_id`) USING BTREE,
   KEY `city_id` (`city_id`) USING BTREE,
   KEY `status` (`status`) USING BTREE
 ) ENGINE=InnoDB;
